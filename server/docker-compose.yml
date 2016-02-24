@@ -1,0 +1,21 @@
+influxdb:
+  image: tutum/influxdb
+  expose:
+  - "8090"
+  - "8099"
+  ports:
+  - "8083:8083"
+  - "8086:8086"
+  environment:
+  - PRE_CREATE_DB=thingspro
+  volumes:
+  - /var/influxdb:/data
+
+grafana:
+  image: grafana/grafana
+  ports:
+  - "3000:3000"
+  links:
+  - influxdb
+  volumes:
+  - /var/grafana:/var/lib/grafana
